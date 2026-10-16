@@ -1,0 +1,1717 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+/* 마우스 커서 자동 숨김 (3초 후) */
+body.hide-cursor,
+body.hide-cursor *,
+.hide-cursor,
+.hide-cursor * {
+    cursor: none !important;
+}
+
+/* 전체 대시보드 커서 숨김 클래스 */
+.dashboard-container.hide-cursor,
+.dashboard-container.hide-cursor * {
+    cursor: none !important;
+}
+
+.dashboard-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #000000;
+}
+
+/* 헤더 스타일 */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 35px;
+    background-color: #0a0a0a;
+    border-bottom: 1px solid #222;
+    min-height: 100px;
+    position: relative;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.system-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #ffffff;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.contact-number {
+    font-size: 18px;
+    font-weight: 500;
+    color: #4aff4a;
+    margin-left: 8px;
+    padding-left: 12px;
+    border-left: 2px solid #333;
+}
+
+.logo-image {
+    height: 28px;
+    width: auto;
+    display: block;
+}
+
+.header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/제목바탕화면.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 15px 60px;
+    border-radius: 8px;
+    width: 815px;
+    height: 80px;
+}
+
+.main-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    background: none;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+    position: relative;
+    z-index: 1;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.datetime {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.quality-legend {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-item span {
+    font-size: 11px;
+    color: #ccc;
+}
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    padding: 15px 20px;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* ChatGPT 오른쪽 패널 */
+.chatgpt-right-panel {
+    flex: 0 0 500px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    border-radius: 15px;
+    padding: 14px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* ChatGPT 중앙 패널 (하위 호환) */
+.chatgpt-middle-panel {
+    flex: 0 0 360px;
+    max-width: 360px;
+    min-width: 360px;
+    width: 360px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    border-radius: 15px;
+    padding: 14px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.chatgpt-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.chatgpt-logo {
+    width: 28px;
+    height: 28px;
+    color: #10a37f;
+    flex-shrink: 0;
+}
+
+.chatgpt-title-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.chatgpt-middle-panel .control-panel-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #4a9eff;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.chatgpt-middle-panel .chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #0a0a0a;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #222;
+    min-height: 0;
+}
+
+.chatgpt-middle-panel .chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+}
+
+.chatgpt-middle-panel .chat-message {
+    padding: 8px 12px;
+    border-radius: 12px;
+    max-width: 90%;
+    word-wrap: break-word;
+    line-height: 1.4;
+    font-size: 13px;
+}
+
+.chatgpt-middle-panel .chat-message.bot {
+    background-color: #2a2a2a;
+    align-self: flex-start;
+    color: #ffffff;
+}
+
+.chatgpt-middle-panel .chat-message.user {
+    background-color: #4a9eff;
+    align-self: flex-end;
+    color: #ffffff;
+}
+
+.chatgpt-middle-panel .chat-input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #222;
+    background-color: #111;
+    gap: 6px;
+}
+
+.chatgpt-middle-panel .chat-input {
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background-color: #222;
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.chatgpt-middle-panel .chat-input:focus {
+    outline: none;
+    border-color: #4a9eff;
+}
+
+.chatgpt-middle-panel .chat-send-btn {
+    padding: 8px 15px;
+    background-color: #4a9eff;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+.chatgpt-middle-panel .chat-send-btn:hover {
+    background-color: #3a8eef;
+}
+
+/* 방 패널 스타일 */
+.room-panel {
+    flex: 1;
+    background-color: #111;
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #333;
+    overflow: hidden;
+}
+
+.room-title {
+    font-size: 34px;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: left;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.room-icon {
+    font-size: 30px;
+}
+
+.room-icon-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* 공기질 그리드 - 3x2 레이아웃 */
+.air-quality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 12px 18px;
+    flex: 1;
+    align-items: center;
+    padding: 8px;
+}
+
+/* 메트릭 카드 */
+.metric-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.metric-label {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* 원형 게이지 */
+.circular-gauge {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1a1a1a 0%, #0f0f0f 100%);
+    border: 8px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+    background-clip: padding-box;
+    cursor: pointer;
+}
+
+.circular-gauge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(74, 255, 74, 0.3);
+}
+
+.circular-gauge:active {
+    transform: scale(0.98);
+}
+
+/* 원형 프로그레스 바 스타일 */
+.gauge-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: #2a2a2a;
+    stroke-width: 8;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke: #4aff4a;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 483.8;
+    stroke-dashoffset: 483.8;
+    transition: stroke-dashoffset 0.5s ease, stroke 0.3s ease;
+}
+
+/* 공기질 상태별 색상 */
+.gauge-fill.very-good {
+    stroke: rgb(146, 208, 80);
+}
+
+.gauge-fill.good {
+    stroke: rgb(240, 239, 0);
+}
+
+.gauge-fill.moderate {
+    stroke: rgb(255, 192, 0);
+}
+
+.gauge-fill.bad {
+    stroke: rgb(240, 0, 0);
+}
+
+.gauge-fill.very-bad {
+    stroke: rgb(128, 0, 128);
+}
+
+.gauge-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    position: relative;
+}
+
+.gauge-value .value {
+    font-size: 42px;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.gauge-value .unit {
+    font-size: 14px;
+    color: #aaaaaa;
+    margin-top: 4px;
+    font-weight: 400;
+}
+
+/* 상태별 게이지 색상 */
+.circular-gauge.status-very-good {
+    border-color: rgb(146, 208, 80);
+}
+
+.circular-gauge.status-good {
+    border-color: rgb(240, 239, 0);
+}
+
+.circular-gauge.status-normal {
+    border-color: rgb(255, 192, 0);
+}
+
+.circular-gauge.status-bad {
+    border-color: rgb(240, 0, 0);
+}
+
+.circular-gauge.status-very-bad {
+    border-color: rgb(128, 0, 128);
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+/* 매우나쁨 점멸 효과 */
+@keyframes blink {
+    0%, 100% {
+        border-color: rgb(128, 0, 128);
+        box-shadow: 0 0 0 rgba(128, 0, 128, 0);
+    }
+    50% {
+        border-color: rgb(255, 0, 255);
+        box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+    }
+}
+
+/* 하단 패널 영역 */
+.bottom-panels {
+    display: flex;
+    gap: 12px;
+    padding: 8px 20px 8px 20px;
+    background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
+    border-top: none;
+    min-height: 180px !important;
+    max-height: 180px !important;
+    height: 180px !important;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+/* 패널 그룹 (급배기 그룹, 온습도 그룹) */
+.panel-group {
+    flex: 1;
+    display: flex;
+    gap: 12px;
+    min-width: 0;
+}
+
+.panel-group .control-panel {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+}
+
+/* 왼쪽 패널 그룹 (급배기 + 온습도) */
+.left-panels-group {
+    flex: 1;
+    display: flex;
+    gap: 15px;
+    min-width: 0;
+}
+
+/* 하단 위치맵 패널 */
+.kitchen-map-panel-bottom {
+    flex: 0 0 500px;
+    position: relative;
+    background: linear-gradient(135deg, #111111 0%, #0d0d0d 100%);
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.control-panel {
+    flex: 1;
+    background: linear-gradient(135deg, #111111 0%, #0d0d0d 100%);
+    border-radius: 8px;
+    padding: 18px 16px;
+    border: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.control-panel:hover {
+    border-color: #3a3a3a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.control-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}
+
+.control-panel-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 14px 0;
+    text-align: center;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status-indicator {
+    display: none;
+    width: 12px;
+    height: 12px;
+    background-color: #4aff4a;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(74, 255, 74, 0.8);
+    flex-shrink: 0;
+}
+
+.status-indicator.on {
+    background-color: #4aff4a;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.status-indicator.off {
+    background-color: #4a4a4a;
+    box-shadow: none;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(74, 255, 74, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 16px rgba(74, 255, 74, 1);
+    }
+}
+
+/* 환기 패널 */
+.ventilation-controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    flex: 1;
+    min-height: 0;
+}
+
+.vent-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+    padding: 8px 6px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    border: 1px solid #2a2a2a;
+}
+
+.vent-info-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+}
+
+.vent-label {
+    font-size: 17px;
+    color: #cccccc;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    text-align: center;
+    width: 100%;
+}
+
+.vent-speed {
+    font-size: 30px;
+    font-weight: 700;
+    color: #4aff4a;
+    white-space: nowrap;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+}
+
+.fan-icon {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
+    border-radius: 50%;
+    padding: 4px;
+    border: 2px solid #2a2a2a;
+    flex-shrink: 0;
+}
+
+.fan-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.fan-icon.active img {
+    animation: rotate 2s linear infinite;
+}
+
+.fan-icon.inactive img {
+    opacity: 0.3;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 온/습도 패널 */
+.temp-humidity-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    justify-content: center;
+    min-height: 0;
+    padding: 12px 5px 12px 0px;
+}
+
+.temp-humidity-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 5px 6px 0px;
+    min-height: 0;
+}
+
+.th-icon {
+    font-size: 24px;
+    width: 28px;
+    text-align: left;
+    flex-shrink: 0;
+    margin-right: 8px;
+    margin-left: 0px;
+}
+
+.th-content {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    min-width: 0;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.th-label {
+    font-size: 20px;
+    color: #aaaaaa;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.th-value {
+    font-size: 38px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.th-unit {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 3px;
+    opacity: 0.8;
+}
+
+.progress-bar {
+    flex: 1;
+    min-width: 150px;
+    height: 28px;
+    background-color: #1a1a1a;
+    border-radius: 7px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4a9eff 0%, #5abfff 50%, #6acfff 100%);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 8px rgba(74, 158, 255, 0.5);
+}
+
+/* 온도 프로그레스 바 - 붉은 계통 */
+#kitchen-temp-progress,
+#washing-temp-progress {
+    background: linear-gradient(90deg, #ff4a4a 0%, #ff6b6b 50%, #ff8a8a 100%);
+    box-shadow: 0 0 8px rgba(255, 74, 74, 0.5);
+}
+
+/* 습도 프로그레스 바 - 파란 계통 */
+#kitchen-hum-progress,
+#washing-hum-progress {
+    background: linear-gradient(90deg, #4a9eff 0%, #5abfff 50%, #6acfff 100%);
+    box-shadow: 0 0 8px rgba(74, 158, 255, 0.5);
+}
+
+/* 조리실/세척실 위치 맵 패널 (하단 오른쪽, 크기 축소) */
+.kitchen-map-panel {
+    flex: 0 0 280px;
+    position: relative;
+    background: linear-gradient(135deg, #111111 0%, #0d0d0d 100%);
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.kitchen-map-panel .control-panel-header {
+    margin-bottom: 5px;
+    justify-content: flex-start;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.kitchen-map-panel .control-panel-title {
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.kitchen-map-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    min-height: 0;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+.kitchen-map-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px;
+    border: 1px solid #2a2a2a;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.fridge-controls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px;
+    padding: 4px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.fridge-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    border: 1px solid #2a2a2a;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.fridge-icon {
+    font-size: 38px;
+    width: 42px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.fridge-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.fridge-label {
+    font-size: 17px;
+    color: #aaaaaa;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fridge-temp-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    min-width: 0;
+}
+
+.fridge-temp {
+    font-size: 28px;
+    font-weight: 700;
+    color: #4aff4a;
+    line-height: 1.0;
+    white-space: nowrap;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fridge-unit {
+    font-size: 9px;
+    font-weight: 500;
+    margin-left: 1px;
+    flex-shrink: 0;
+}
+
+.fridge-status {
+    display: none;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    width: fit-content;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.fridge-status.good {
+    background-color: rgba(74, 255, 74, 0.2);
+    color: #4aff4a;
+    border: 1px solid rgba(74, 255, 74, 0.4);
+}
+
+.fridge-status.warning {
+    background-color: rgba(255, 192, 0, 0.2);
+    color: #ffc000;
+    border: 1px solid rgba(255, 192, 0, 0.4);
+}
+
+.fridge-status.error {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #ff0000;
+    border: 1px solid rgba(255, 0, 0, 0.4);
+}
+
+/* PLC 연결 상태 버튼 점멸 애니메이션 - 초록색 (연결됨) */
+@keyframes plcPulseGreen {
+    0%, 100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 15px rgba(74, 222, 128, 0.8), 0 0 25px rgba(74, 222, 128, 0.5);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1.15);
+        box-shadow: 0 0 25px rgba(74, 222, 128, 1), 0 0 40px rgba(74, 222, 128, 0.7);
+    }
+}
+
+/* PLC 연결 상태 버튼 점멸 애니메이션 - 빨간색 (연결 끊김) */
+@keyframes plcPulseRed {
+    0%, 100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.8), 0 0 25px rgba(239, 68, 68, 0.5);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1.15);
+        box-shadow: 0 0 25px rgba(239, 68, 68, 1), 0 0 40px rgba(239, 68, 68, 0.7);
+    }
+}
+
+/* 기존 pulse 애니메이션 (하위 호환성 유지) */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+.sensor-marker {
+    cursor: help;
+    transition: all 0.3s ease;
+}
+
+.sensor-marker:hover {
+    transform: translate(-50%, -50%) scale(1.3) !important;
+}
+
+/* PLC 상태 버튼 스타일 */
+.plc-status-button {
+    transition: all 0.3s ease;
+}
+
+.plc-status-button:hover {
+    transform: translate(-50%, -50%) scale(1.3) !important;
+}
+
+.plc-status-button.connected {
+    background-color: #4ade80 !important;
+}
+
+.plc-status-button.disconnected {
+    background-color: #ef4444 !important;
+}
+
+/* 맵 팝업 모달 */
+.map-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.map-popup-container {
+    position: relative;
+    max-width: 95vw;
+    max-height: 90vh;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    animation: slideIn 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.map-popup-main {
+    display: flex;
+    gap: 20px;
+    max-height: 85vh;
+    overflow: hidden;
+}
+
+.map-popup-content {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+@keyframes slideIn {
+    from { 
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to { 
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.map-popup-image {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* 오른쪽 사이드바 */
+.map-popup-sidebar {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #0d0d0d;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.sidebar-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #333;
+    text-align: center;
+}
+
+.sidebar-image-item {
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #2a2a2a;
+    transition: all 0.3s ease;
+    background-color: #1a1a1a;
+}
+
+.sidebar-image-item:hover {
+    border-color: #4a9eff;
+    box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.sidebar-thumbnail {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+.sidebar-image-title {
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 전체 화면 이미지 뷰어 */
+.fullscreen-image-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 20000;
+    animation: fadeIn 0.3s ease;
+}
+
+.fullscreen-image-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ef4444;
+    color: white;
+    border: 3px solid white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    z-index: 20001;
+}
+
+.fullscreen-image-close:hover {
+    background-color: #dc2626;
+    transform: rotate(90deg) scale(1.1);
+}
+
+.fullscreen-image-title {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 12px 30px;
+    border-radius: 8px;
+    z-index: 20001;
+}
+
+.fullscreen-image-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: 500;
+    color: #adb5bd;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 8px 20px;
+    border-radius: 6px;
+    z-index: 20001;
+    white-space: nowrap;
+}
+
+.fullscreen-image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.fullscreen-image {
+    max-width: 95vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.map-popup-close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ef4444;
+    color: white;
+    border: 3px solid white;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    z-index: 10001;
+}
+
+.map-popup-close:hover {
+    background-color: #dc2626;
+    transform: rotate(90deg) scale(1.1);
+}
+
+.sensor-marker-popup {
+    cursor: default;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1920px) {
+    .circular-gauge {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .gauge-value .value {
+        font-size: 50px;
+    }
+    
+    .bottom-panels {
+        padding: 8px 20px;
+        min-height: 180px !important;
+        max-height: 180px !important;
+        height: 180px !important;
+    }
+    
+    .control-panel-title {
+        font-size: 18px;
+    }
+    
+    .vent-speed {
+        font-size: 28px;
+    }
+    
+    .th-value {
+        font-size: 32px;
+    }
+    
+    .fridge-temp {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1600px) {
+    .circular-gauge {
+        width: 185px;
+        height: 185px;
+    }
+    
+    .gauge-value .value {
+        font-size: 46px;
+    }
+    
+    .metric-label {
+        font-size: 23px;
+    }
+    
+    .air-quality-grid {
+        gap: 15px 25px;
+    }
+}
+
+@media (max-width: 1366px) {
+    .circular-gauge {
+        width: 170px;
+        height: 170px;
+    }
+    
+    .gauge-value .value {
+        font-size: 42px;
+    }
+    
+    .gauge-value .unit {
+        font-size: 14px;
+    }
+    
+    .air-quality-grid {
+        gap: 10px 20px;
+    }
+    
+    .bottom-panels {
+        min-height: 180px !important;
+        max-height: 180px !important;
+        height: 180px !important;
+    }
+    
+    .fan-icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* 태블릿 최적화 (768px ~ 1024px) */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .dashboard-container {
+        padding: 10px;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .main-title {
+        font-size: 32px !important;
+    }
+    
+    .main-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .room-panel {
+        width: 100%;
+    }
+    
+    .air-quality-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    
+    .circular-gauge {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .gauge-value .value {
+        font-size: 36px;
+    }
+    
+    .bottom-panels {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .control-panel {
+        width: 100%;
+    }
+}
+
+/* 모바일 최적화 (최대 767px) */
+@media (max-width: 767px) {
+    .dashboard-container {
+        padding: 8px;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+    }
+    
+    .header-left,
+    .header-center,
+    .header-right {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .main-title {
+        font-size: 20px !important;
+        text-align: center;
+    }
+    
+    .system-title {
+        font-size: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .contact-number {
+        font-size: 12px;
+    }
+    
+    .datetime {
+        font-size: 14px;
+    }
+    
+    .quality-legend {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .legend-item {
+        font-size: 11px;
+    }
+    
+    .main-content {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .room-panel {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    .room-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .air-quality-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .circular-gauge {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .gauge-value .value {
+        font-size: 32px;
+    }
+    
+    .gauge-value .unit {
+        font-size: 12px;
+    }
+    
+    .metric-label {
+        font-size: 14px;
+    }
+    
+    .chatgpt-middle-panel {
+        padding: 15px;
+        min-height: 200px;
+    }
+    
+    .chatgpt-title-text {
+        font-size: 18px !important;
+    }
+    
+    .bottom-panels {
+        flex-direction: column;
+        gap: 12px;
+        padding: 10px;
+    }
+    
+    .control-panel {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    .control-panel-title {
+        font-size: 16px;
+    }
+    
+    .kitchen-map-panel {
+        min-height: 250px;
+    }
+    
+    .plc-status-button {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    /* 터치 최적화 */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    button, .circular-gauge, .kitchen-map-container {
+        touch-action: manipulation;
+    }
+}
+
+/* 작은 모바일 (최대 480px) */
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 16px !important;
+    }
+    
+    .air-quality-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .circular-gauge {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .gauge-value .value {
+        font-size: 28px;
+    }
+    
+    .map-popup-content {
+        padding: 15px;
+    }
+    
+    .map-popup-close {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+        top: -12px;
+        right: -12px;
+    }
+}
+
+/* AI 알림 박스 스타일 */
+.aiAlertBox {
+    font-size: 38px;      /* 멀리서 읽기 */
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    padding: 14px 16px;
+}
+
+.aiAlertBox .sub {
+    font-size: 34px;
+    opacity: 0.95;
+}
+
+/* AI 알림 패널 레이아웃 */
+.ai-alert-panel {
+    grid-column: 1 / -1;
+    background-color: #0a0a0a !important;
+    border: 2px solid #333 !important;
+}
+
+/* AI 패널 스타일 */
+.ai-panel {
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+    border: none;
+}
+
+.ai-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.ai-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.ai-badge {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 4px;
+}
+
+.ai-badge.good {
+    background-color: rgba(74, 255, 74, 0.2);
+    color: #4aff4a;
+    border: 1px solid rgba(74, 255, 74, 0.4);
+}
+
+.ai-badge.warn {
+    background-color: rgba(255, 192, 0, 0.2);
+    color: #ffc000;
+    border: 1px solid rgba(255, 192, 0, 0.4);
+}
+
+.ai-badge.danger {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #ff0000;
+    border: 1px solid rgba(255, 0, 0, 0.4);
+}
+
+.ai-brief {
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.ai-summary {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.ai-actions {
+    margin-top: 8px;
+}
+
+.ai-action {
+    font-size: 34px;
+    opacity: 0.95;
+    line-height: 1.3;
+    color: #e0e0e0;
+    margin: 4px 0;
+}
+
+.ai-chat {
+    margin-top: 16px;
+}
+
+.ai-chat-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+.ai-chat-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.ai-input {
+    flex: 1;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.ai-input:focus {
+    outline: none;
+    border-color: #4aff4a;
+}
+
+.ai-btn {
+    background-color: #4aff4a;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.ai-btn:hover:not(:disabled) {
+    background-color: #3ae03a;
+}
+
+.ai-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ai-answer {
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #e0e0e0;
+}
+
+.ai-answer.muted {
+    color: #666;
+    font-style: italic;
+}

@@ -1,0 +1,113 @@
+plc:
+  ip: "192.168.0.120"
+  port: 502
+  unit_id: 1
+
+poll:
+  interval_sec: 5.0
+
+# ✅ INPUT REGISTER (FC04) 사용
+# 주소 0부터 70개를 읽어서 %MW0~%MW69 모두 확보 (조리실 + 세척실)
+read_block:
+  start: 0
+  count: 70
+
+scale:
+  temp_div: 1.0
+  hum_div: 1.0
+
+storage:
+  sqlite_path: "airq.db"
+  log_every_n_samples: 60   # 5분마다 저장 (5초 × 60 = 300초)
+
+# Google Sheets 설정
+google_sheets:
+  enabled: false  # 조직 정책으로 인해 일단 비활성화
+  credentials_file: "credentials.json"  # Google API 인증 파일
+  spreadsheet_id: ""  # 스프레드시트 ID (나중에 입력)
+  sheet_name: "공기질데이터"
+  upload_interval_min: 60  # 60분마다 업로드
+
+# 이메일 자동 발송 설정
+email:
+  enabled: false  # 비활성화 (공기질 리포트 안 보냄)
+  smtp_server: "smtp.gmail.com"  # Gmail SMTP
+  smtp_port: 587
+  sender_email: "m3n89t@gmail.com"  # 발신자 Gmail 주소
+  sender_password: "wpbgaqgvyyhycmli"  # Gmail 앱 비밀번호
+  receiver_emails:  # 수신자 목록
+    - "m3n89t@gmail.com"
+  
+  # 학교 정보
+  school_name: "중앙여중"  # 이메일 제목에 표시될 학교명
+  
+  # 리포트 발송 설정
+  daily_report_time: "09:00"  # 매일 오전 9시 자동 발송
+  weekly_report_day: 5  # 0=월요일, 5=토요일
+  
+  # 긴급 알림 설정
+  emergency_alert: false  # 공기질 나쁨 이상 시 즉시 알림
+  emergency_threshold: "bad"  # very_good, good, normal, bad, very_bad
+
+ollama:
+  url: "http://127.0.0.1:11434/api/generate"
+  model: "qwen2.5:1.5b"
+  alert_interval_sec: 5   # 5초마다 실시간 알림 (빠른 응답)
+  prophet_interval_sec: 60  # 60초마다 시계열 분석 (백그라운드)
+  timeout_sec: 40          # 타임아웃 증가
+
+# 공기질 상세 기준표 (학교 기준 - 2026년 1월 5일 업데이트)
+# 각 등급의 [최소값, 최대값] 범위 (최대값 포함)
+thresholds:
+  pm25:
+    very_good: [0, 35]       # 매우좋음: 0~35
+    good: [36, 75]           # 좋음: 36~75
+    normal: [76, 99]         # 보통: 76~99
+    bad: [100, 109]          # 나쁨: 100~109
+    very_bad: [110, 9999]    # 매우나쁨: 110~
+  
+  pm10:
+    very_good: [0, 80]       # 매우좋음: 0~80
+    good: [81, 149]          # 좋음: 81~149
+    normal: [150, 199]       # 보통: 150~199
+    bad: [200, 219]          # 나쁨: 200~219
+    very_bad: [220, 9999]    # 매우나쁨: 220~
+  
+  co2:
+    very_good: [0, 1000]     # 매우좋음: 0~1000
+    good: [1001, 1500]       # 좋음: 1001~1500
+    normal: [1501, 2000]     # 보통: 1501~2000
+    bad: [2001, 2199]        # 나쁨: 2001~2199
+    very_bad: [2200, 9999]   # 매우나쁨: 2200~
+  
+  voc:
+    very_good: [0, 600]      # 매우좋음: 0~600 (변경됨)
+    good: [601, 1000]        # 좋음: 601~1000
+    normal: [1001, 1500]     # 보통: 1001~1500 (변경됨)
+    bad: [1501, 2000]        # 나쁨: 1501~2000 (변경됨)
+    very_bad: [2001, 9999]   # 매우나쁨: 2001~ (변경됨)
+  
+  formaldehyde:
+    very_good: [0, 80]       # 매우좋음: 0~80
+    good: [81, 130]          # 좋음: 81~130
+    normal: [131, 199]       # 보통: 131~199
+    bad: [200, 500]          # 나쁨: 200~500
+    very_bad: [501, 9999]    # 매우나쁨: 501~
+  
+  co:
+    very_good: [1, 10]       # 매우좋음: 1~10
+    good: [11, 20]           # 좋음: 11~20
+    normal: [21, 24]         # 보통: 21~24
+    bad: [25, 26]            # 나쁨: 25~26
+    very_bad: [27, 9999]     # 매우나쁨: 27~
+
+# 팬 조정 추천 기본폭
+actions:
+  step_warn: 10
+  step_bad: 15
+
+# 패턴 분석 기간
+learning:
+  days: 14
+  bucket_min: 15   # 15분 단위로 시간대 패턴 학습
+
